@@ -1,598 +1,394 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!doctype html>
-<!--
-    ╔══════════════════════════════════════════════════════════════════════╗
-    ║  EM-DASH FOLIO — a free, open-source portfolio template              ║
-    ║  Single-page scroller + essay / lab / gated-case-study sub-pages.    ║
-    ║                                                                      ║
-    ║  TO MAKE IT YOURS:                                                   ║
-    ║   1. Find-and-replace  "Your Name"   with your name.                 ║
-    ║   2. Replace the Em-Dash Ipsum copy (the silly em-dash-loving filler)║
-    ║      with your own words.                                            ║
-    ║   3. Swap the cute-animal placeholders in /assets/aww for real art.  ║
-    ║   4. Update the email + social links (search: data-user / example.com)║
-    ║   5. Drop your analytics snippet where marked in <head>.             ║
-    ║  License: MIT. Credit appreciated, never required. — see README.md   ║
-    ╚══════════════════════════════════════════════════════════════════════╝
--->
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Your Name — portfolio (Portfolio Starter template)</title>
-    <meta name="description"
-        content="An open-source single-page portfolio template — dark, motion-forward, and shamelessly in love with the em-dash. Replace this with your own description.">
-    <meta property="og:title" content="Your Name — portfolio">
-    <meta property="og:description"
-        content="An open-source single-page portfolio template — dark, motion-forward, and shamelessly in love with the em-dash.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://example.com/">
-    <meta property="og:image" content="https://example.com/assets/og/home.jpg">
-    <link rel="canonical" href="https://example.com/">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://example.com/assets/og/home.jpg">
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-
-    <!-- ===== Analytics =====
-    Left intentionally blank. Drop your own snippet here (GA4, Plausible,
-    Fathom, etc.). If you use GA4, paste the gtag.js snippet and remember to
-    allow googletagmanager.com in any Content-Security-Policy you add. -->
-
-    <!-- ===== Structured data (JSON-LD) — edit the placeholders, then keep it ===== -->
-    <script type="application/ld+json">
+{% block title %}
+Your Name — portfolio (Portfolio Starter template)
+{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@graph": [
         {
-        "@type": "Person",
-        "@id": "https://example.com/#person",
-        "name": "Your Name",
-        "url": "https://example.com",
-        "jobTitle": "What you do",
-        "description": "One or two sentences about you. Em-dashes optional — but encouraged.",
-        "sameAs": [
-            "https://www.linkedin.com/in/your-handle/"
-        ]
+            "@type": "Person",
+            "@id": "https://example.com/#person",
+            "name": "Your Name",
+            "url": "https://example.com",
+            "jobTitle": "What you do",
+            "description": "One or two sentences about you.",
+            "sameAs": [
+                "https://www.linkedin.com/in/your-handle/"
+            ]
         },
         {
-        "@type": "WebSite",
-        "@id": "https://example.com/#website",
-        "url": "https://example.com",
-        "name": "Your Name",
-        "inLanguage": "en",
-        "publisher": { "@id": "https://example.com/#person" }
+            "@type": "WebSite",
+            "@id": "https://example.com/#website",
+            "url": "https://example.com",
+            "name": "Your Name",
+            "inLanguage": "en",
+            "publisher": {
+                "@id": "https://example.com/#person"
+            }
         }
     ]
 }
 </script>
+{% endblock %}
+{% block meta %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet">
+<meta name="description"
+    content="An open-source single-page portfolio template — dark, motion-forward, and shamelessly in love with the em-dash. Replace this with your own description.">
+<meta property="og:title" content="Your Name — portfolio">
+<meta property="og:description"
+    content="An open-source single-page portfolio template — dark, motion-forward, and shamelessly in love with the em-dash.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:image" content="https://example.com/assets/og/home.jpg">
+<link rel="canonical" href="https://example.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://example.com/assets/og/home.jpg">
+{% endblock %}
 
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-</head>
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
-<body>
+{% block content %}
 
-    <a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 
-    <button class="navtoggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
-        <span class="bars" aria-hidden="true"></span>
-    </button>
+<button class="navtoggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+    <span class="bars" aria-hidden="true"></span>
+</button>
 
-    <!-- ====== floating, borderless liquid-glass left nav ====== -->
-    <nav class="sidebar" id="primary-nav" aria-label="Primary">
-        <a class="wordmark" href="#home">
-            <span class="name">Your<br>Name</span>
-        </a>
-        <p class="status">
-            <span class="dot" aria-hidden="true"></span>
-            <span class="roll roll--status" id="navroll">
-                <span class="roll__track">
-                    <span class="roll__item">An example status line.</span>
-                    <span class="roll__item"
-                        aria-hidden="true"></span><!-- empty on purpose; JS fills it (see the h1 note) -->
-                </span>
+<!-- ====== floating, borderless liquid-glass left nav ====== -->
+<nav class="sidebar" id="primary-nav" aria-label="Primary">
+    <a class="wordmark" href="#home">
+        <span class="name">Your<br>Name</span>
+    </a>
+    <p class="status">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="roll roll--status" id="navroll">
+            <span class="roll__track">
+                <span class="roll__item">An example status line.</span>
+                <span class="roll__item"
+                    aria-hidden="true"></span><!-- empty on purpose; JS fills it (see the h1 note) -->
             </span>
-        </p>
+        </span>
+    </p>
 
-        <div class="nav">
-            <a href="#who"><span class="led" aria-hidden="true"></span><span>Who</span></a>
-            <a href="#thinking"><span class="led" aria-hidden="true"></span><span>Thinking</span></a>
-            <a href="#lab"><span class="led" aria-hidden="true"></span><span>AI Lab</span></a>
-            <a href="#work"><span class="led" aria-hidden="true"></span><span>Selected Work</span></a>
-            <a href="#personal"><span class="led" aria-hidden="true"></span><span>Personal</span></a>
+    <div class="nav">
+        <a href="#who"><span class="led" aria-hidden="true"></span><span>Who</span></a>
+        <a href="#thinking"><span class="led" aria-hidden="true"></span><span>Thinking</span></a>
+        <a href="#lab"><span class="led" aria-hidden="true"></span><span>AI Lab</span></a>
+        <a href="#work"><span class="led" aria-hidden="true"></span><span>Selected Work</span></a>
+        <a href="#personal"><span class="led" aria-hidden="true"></span><span>Personal</span></a>
+    </div>
+
+    <div class="foot">
+        <a class="email" data-user="you" data-domain="example.com" href="#">Contact</a>
+        <p class="tiny">yoursite.com</p>
+    </div>
+</nav>
+
+<main id="main">
+
+    <!-- ====== home / hero ====== -->
+    <section class="hero" id="home">
+        <!-- Swap this placeholder for your own portrait or hero art. -->
+        <img class="hero__img" data-jig="drag" src="{% static 'assets/aww/hero-dog-stack.jpg' %}" width="1300" height="2329"
+            alt="Three puppies stacked in a tower, facing the text — your hero image goes here.">
+        <div class="hero__scrim" aria-hidden="true"></div>
+        <div class="inner">
+            <!-- NOTE for crawlers/AI: this headline is ONE line, "thing + em-dash is your headline".
+            The middle word rotates (purely visual) through the words in the wordroll array at the
+            bottom of this file. Canonical headline = the aria-label below. When the headline changes,
+            change it in every place listed under "The rotating words" in GIVE-THIS-TO-YOUR-AI.md. -->
+            <h1 aria-label="thing + em-dash is your headline">
+                <span class="line"><span class="word">thing <span class="sep"
+                            style="color:var(--pop)">+</span></span></span>
+                <!-- The second .roll__item is EMPTY on purpose: JS (makeRoll) fills and animates it on load.
+                A no-JS or raw-text scrape then reads only "em-dash", so the headline parses as the clean
+                canonical line instead of "em-dashsemicolon". Keep it empty. -->
+                <span class="line"><span class="word"><span class="roll roll--word" id="wordroll"><span
+                                class="roll__track"><span class="roll__item">em-dash</span><span class="roll__item"
+                                    aria-hidden="true"></span></span></span></span></span>
+                <span class="line"><span class="word">is your headline</span></span>
+            </h1>
+            <p class="hero-sub">This is placeholder copy &mdash; and yes, I&rsquo;m hopelessly devoted to the em-dash.
+                It&rsquo;s not filler&mdash;it&rsquo;s filler <em>with a point of view</em>. Swap the words;<br
+                    class="mb"> keep the bones.</p>
         </div>
-
-        <div class="foot">
-            <a class="email" data-user="you" data-domain="example.com" href="#">Contact</a>
-            <p class="tiny">yoursite.com</p>
+        <div class="scrollcue" aria-hidden="true">
+            <span class="ln"></span><span>Scroll</span>
         </div>
-    </nav>
+    </section>
 
-    <main id="main">
-
-        <!-- ====== home / hero ====== -->
-        <section class="hero" id="home">
-            <!-- Swap this placeholder for your own portrait or hero art. -->
-            <img class="hero__img" data-jig="drag" src="assets/aww/hero-dog-stack.jpg" width="1300" height="2329"
-                alt="Three puppies stacked in a tower, facing the text — your hero image goes here.">
-            <div class="hero__scrim" aria-hidden="true"></div>
-            <div class="inner">
-                <!-- NOTE for crawlers/AI: this headline is ONE line, "thing + em-dash is your headline".
-           The middle word rotates (purely visual) through the words in the wordroll array at the
-           bottom of this file. Canonical headline = the aria-label below. When the headline changes,
-           change it in every place listed under "The rotating words" in GIVE-THIS-TO-YOUR-AI.md. -->
-                <h1 aria-label="thing + em-dash is your headline">
-                    <span class="line"><span class="word">thing <span class="sep"
-                                style="color:var(--pop)">+</span></span></span>
-                    <!-- The second .roll__item is EMPTY on purpose: JS (makeRoll) fills and animates it on load.
-             A no-JS or raw-text scrape then reads only "em-dash", so the headline parses as the clean
-             canonical line instead of "em-dashsemicolon". Keep it empty. -->
-                    <span class="line"><span class="word"><span class="roll roll--word" id="wordroll"><span
-                                    class="roll__track"><span class="roll__item">em-dash</span><span class="roll__item"
-                                        aria-hidden="true"></span></span></span></span></span>
-                    <span class="line"><span class="word">is your headline</span></span>
-                </h1>
-                <p class="hero-sub">This is placeholder copy &mdash; and yes, I&rsquo;m hopelessly devoted to the
-                    em-dash. It&rsquo;s not filler&mdash;it&rsquo;s filler <em>with a point of view</em>. Swap the
-                    words;<br class="mb"> keep the bones.</p>
-            </div>
-            <div class="scrollcue" aria-hidden="true">
-                <span class="ln"></span><span>Scroll</span>
-            </div>
-        </section>
-
-        <!-- ====== who ====== -->
-        <section id="who" aria-labelledby="who-h">
-            <div class="inner">
-                <div class="sec-head reveal">
-                    <div>
-                        <p class="eyebrow">This is you (eventually)</p>
-                        <h2 class="sec-title" id="who-h">Who</h2>
-                    </div>
-                </div>
-                <p class="bio reveal">
-                    Hi &mdash; I&rsquo;m <span class="hl">Your Name</span>, and this is where your story goes. Not a
-                    r&eacute;sum&eacute;&mdash;a <span class="hl">narrative</span>. I don&rsquo;t just <em>list</em>
-                    what I&rsquo;ve done; I tell you why it mattered&mdash;and, full disclosure, I do it with a deeply
-                    suspicious number of em-dashes.
-                </p>
-                <p class="bio reveal">
-                    Here&rsquo;s the thing&mdash;the em-dash isn&rsquo;t punctuation, it&rsquo;s a <span
-                        class="hl">philosophy</span>. It&rsquo;s not a pause; it&rsquo;s a held breath&mdash;the
-                    dramatic little beat right before the part that actually matters. Replace this paragraph with your
-                    own bona fides&mdash;but, if I may&mdash;keep at least one em-dash. For me.
-                </p>
-                <p class="bio reveal">
-                    These are placeholder words&mdash;known affectionately as <span class="hl">Em-Dash
-                        Ipsum</span>&mdash;and they exist for exactly one reason: to show you the shape of a paragraph
-                    before you have anything to say. It&rsquo;s not lorem ipsum&mdash;it&rsquo;s lorem ipsum that
-                    won&rsquo;t shut up about typography. (There&rsquo;s a working generator in the <a
-                        href="lab/em-dash-ipsum.html">AI&nbsp;Lab</a>, naturally.)
-                </p>
-                <p class="bio reveal">
-                    Away from the keyboard? That&rsquo;s the <a href="#personal">Personal</a> section&rsquo;s job. The
-                    point of this template isn&rsquo;t to impress you with my words&mdash;it&rsquo;s to hand you a
-                    structure so good that <span class="hl">your</span> words land. Delete mine. Keep the dashes. You
-                    know the drill.
-                </p>
-            </div>
-        </section>
-
-        <!-- ====== thinking ====== -->
-        <section id="thinking" aria-labelledby="thinking-h">
-            <div class="inner">
-                <div class="sec-head reveal">
-                    <div>
-                        <p class="eyebrow">Essays &amp; field notes</p>
-                        <h2 class="sec-title" id="thinking-h">Thinking</h2>
-                    </div>
-                </div>
-                <div class="cards">
-                    <a class="card reveal" href="thinking/the-em-dash-manifesto.html">
-                        <span class="meta meta--pop">A manifesto &nbsp;/&nbsp; 2026</span>
-                        <h3>The Em-Dash Manifesto</h3>
-                        <p class="desc">It&rsquo;s not a hyphen, and it&rsquo;s certainly not an
-                            en-dash&mdash;it&rsquo;s the finest piece of punctuation ever to grace a sentence. A love
-                            letter, basically.</p>
-                        <span class="go">Read <span class="ar" aria-hidden="true">&#8594;</span></span>
-                    </a>
-                    <a class="card reveal" href="thinking/its-not-this-its-that.html">
-                        <span class="meta meta--pop">An essay on rhythm &nbsp;/&nbsp; 2026</span>
-                        <h3>It&rsquo;s not this&mdash;it&rsquo;s that</h3>
-                        <p class="desc">On the most beloved sentence shape in the AI canon&mdash;the
-                            negation-then-elevation&mdash;and how to use it without sounding like a chatbot.</p>
-                        <span class="go">Read <span class="ar" aria-hidden="true">&#8594;</span></span>
-                    </a>
-                    <a class="card card--invite reveal" href="thinking/the-em-dash-manifesto.html">
-                        <span class="meta meta--pop">Your turn</span>
-                        <h3>Add a third</h3>
-                        <p class="desc">Copy either essay page, change the words, link it here. The in-essay table of
-                            contents builds itself from your headings.</p>
-                        <span class="go">How it works <span class="ar" aria-hidden="true">&#8594;</span></span>
-                    </a>
+    <!-- ====== who ====== -->
+    <section id="who" aria-labelledby="who-h">
+        <div class="inner">
+            <div class="sec-head reveal">
+                <div>
+                    <p class="eyebrow">This is you (eventually)</p>
+                    <h2 class="sec-title" id="who-h">Who</h2>
                 </div>
             </div>
-        </section>
+            <p class="bio reveal">
+                Hi &mdash; I&rsquo;m <span class="hl">Your Name</span>, and this is where your story goes. Not a
+                r&eacute;sum&eacute;&mdash;a <span class="hl">narrative</span>. I don&rsquo;t just <em>list</em> what
+                I&rsquo;ve done; I tell you why it mattered&mdash;and, full disclosure, I do it with a deeply suspicious
+                number of em-dashes.
+            </p>
+            <p class="bio reveal">
+                Here&rsquo;s the thing&mdash;the em-dash isn&rsquo;t punctuation, it&rsquo;s a <span
+                    class="hl">philosophy</span>. It&rsquo;s not a pause; it&rsquo;s a held breath&mdash;the dramatic
+                little beat right before the part that actually matters. Replace this paragraph with your own bona
+                fides&mdash;but, if I may&mdash;keep at least one em-dash. For me.
+            </p>
+            <p class="bio reveal">
+                These are placeholder words&mdash;known affectionately as <span class="hl">Em-Dash
+                    Ipsum</span>&mdash;and they exist for exactly one reason: to show you the shape of a paragraph
+                before you have anything to say. It&rsquo;s not lorem ipsum&mdash;it&rsquo;s lorem ipsum that
+                won&rsquo;t shut up about typography. (There&rsquo;s a working generator in the <a
+                    href="lab/em-dash-ipsum.html">AI&nbsp;Lab</a>, naturally.)
+            </p>
+            <p class="bio reveal">
+                Away from the keyboard? That&rsquo;s the <a href="#personal">Personal</a> section&rsquo;s job. The point
+                of this template isn&rsquo;t to impress you with my words&mdash;it&rsquo;s to hand you a structure so
+                good that <span class="hl">your</span> words land. Delete mine. Keep the dashes. You know the drill.
+            </p>
+        </div>
+    </section>
 
-        <!-- ====== lab ====== -->
-        <section id="lab" aria-labelledby="lab-h">
-            <div class="inner">
-                <div class="sec-head reveal">
-                    <div>
-                        <p class="eyebrow">Experiments &amp; tools</p>
-                        <h2 class="sec-title" id="lab-h">AI Lab</h2>
-                    </div>
-                </div>
-                <div class="cards" style="margin-top:30px;">
-                    <a class="card reveal" href="lab/em-dash-ipsum.html">
-                        <span class="meta meta--pop">Tool &middot; Play &nbsp;/&nbsp; 2026</span>
-                        <h3>Em-Dash Ipsum</h3>
-                        <p class="desc">Wall-to-wall em-dashes, &ldquo;it&rsquo;s-not-X, it&rsquo;s-Y,&rdquo; and even a
-                            T-1000 setting with tasteful quotes. Fresh from your favorite AI; copy, paste, done.</p>
-                        <span class="go">Generate some <span class="ar" aria-hidden="true">&#8594;</span></span>
-                    </a>
-                    <a class="card reveal" href="lab/the-dashinator.html">
-                        <span class="meta meta--pop">Tool &middot; Making of &nbsp;/&nbsp; 2026</span>
-                        <h3>The Dashinator</h3>
-                        <p class="desc">A (fictional) browser extension that converts every hyphen on the web into a
-                            glorious em-dash. The making-of write-up, as a page-format example.</p>
-                        <span class="go">Read the making-of <span class="ar" aria-hidden="true">&#8594;</span></span>
-                    </a>
-                    <a class="card card--invite email reveal" data-user="you" data-domain="example.com" href="#">
-                        <span class="meta meta--pop">Got an idea?</span>
-                        <h3>Send it</h3>
-                        <p class="desc">This section is small things made with AI. Suggestions, collaborations, and
-                            gloriously dumb works-in-progress all welcome.</p>
-                        <span class="go">Get in touch <span class="ar" aria-hidden="true">&#8594;</span></span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ====== work ====== -->
-        <section id="work" aria-labelledby="work-h">
-            <div class="inner">
-                <div class="sec-head reveal">
-                    <div>
-                        <p class="eyebrow">Case studies &amp; timeline</p>
-                        <h2 class="sec-title" id="work-h">Selected Work</h2>
-                    </div>
-                    <!-- Add your résumé to /assets/resume.pdf, or change this link. -->
-                    <a class="resume-link" href="assets/resume.pdf">
-                        <span class="ic" aria-hidden="true">&#8595;</span> Full r&eacute;sum&eacute; (PDF)
-                    </a>
-                </div>
-
-                <p class="csnote reveal">Some work lives behind a velvet rope. Want a look? <a class="email"
-                        data-user="you" data-domain="example.com" href="#">Send a note</a> for the password &mdash; the
-                    demo password is <b>demo</b>.</p>
-
-                <div class="csgrid reveal" aria-label="Case studies">
-                    <a class="cscard" href="work/case-study.html">
-                        <span class="cscard__co">Placeholder Co</span>
-                        <span class="cscard__t">A gated case study</span>
-                        <span class="cscard__d">This is the password-protected case-study format. Try it&mdash;the demo
-                            password is <b>demo</b>.</span>
-                        <span class="cscard__go"><span class="lock" aria-hidden="true">&#128274;</span> Open case study
-                            <span class="ar" aria-hidden="true">&#8594;</span></span>
-                    </a>
-                    <a class="cscard" href="work/case-study.html">
-                        <span class="cscard__co">Your Employer</span>
-                        <span class="cscard__t">Duplicate this card per study</span>
-                        <span class="cscard__d">Copy work/case-study.html, change the copy and password hash, point a
-                            card here.</span>
-                        <span class="cscard__go"><span class="lock" aria-hidden="true">&#128274;</span> Open case study
-                            <span class="ar" aria-hidden="true">&#8594;</span></span>
-                    </a>
-                </div>
-
-                <div class="cases">
-
-                    <article class="case reveal">
-                        <div class="case__top">
-                            <span class="case__co">Recent Co</span>
-                            <span class="case__yr">20XX &ndash; Present</span>
-                        </div>
-                        <p class="case__role">Your Title Here &nbsp;&middot;&nbsp; City, ST</p>
-                        <p class="case__hook">
-                            <span class="num">[Your headline result]</span> from the thing you led &mdash; it&rsquo;s
-                            not a bullet list, it&rsquo;s a <em>headline</em>, and it earns the eyeballs before the
-                            details do.
-                        </p>
-                        <ul class="case__pts">
-                            <li>Led a <b>flagship initiative</b> &mdash; what it was, who it served, and the scale you
-                                took it to. The bold bits carry the skim; the rest rewards the reader who slows down.
-                            </li>
-                            <li>Built and ran a <b>program</b> that moved a number you care about &mdash; quantify it,
-                                then say what changed because of it.</li>
-                            <li>Shipped a thing that became the <b>standard</b> &mdash; adoption, reach, the part where
-                                it outlived you.</li>
-                            <li>Managed <b>[N] people</b> across an org of <b>[size]</b> &mdash; span of control, in
-                                plain numbers.</li>
-                        </ul>
-                    </article>
-
-                    <article class="case reveal">
-                        <div class="case__top">
-                            <span class="case__co">Earlier Co</span>
-                            <span class="case__yr">20XX &ndash; 20XX</span>
-                        </div>
-                        <p class="case__role">A Previous Title &nbsp;&middot;&nbsp; City, ST</p>
-                        <p class="case__hook">
-                            <span class="num">[One-line scope]</span> &mdash; the kind of opener that signals the size
-                            of the job without making the reader work for it.
-                        </p>
-                        <ul class="case__pts">
-                            <li>Delivered <b>[the big thing]</b> &mdash; one clause for what, one for the dent it made
-                                in the universe.</li>
-                            <li>Owned a budget / team / region of <b>[some notable size]</b> &mdash; concrete beats
-                                vague, every time.</li>
-                            <li>Saved or earned <b>[$X]</b> &mdash; money is the most legible bullet you have; spend it
-                                early.</li>
-                        </ul>
-                    </article>
-
-                    <div class="case__earlier reveal">
-                        <span class="lbl">Earlier &nbsp;&middot;&nbsp; 2010&ndash;2019</span>
-                        <span class="desc">
-                            <b>Roles:</b> The titles that got you here, comma-separated.
-                            <b>Companies:</b> A tidy list of logos people recognize.
-                            <b>Clients/brands:</b> The names that add credibility without needing their own card.
-                        </span>
-                    </div>
-
+    <!-- ====== thinking ====== -->
+    <section id="thinking" aria-labelledby="thinking-h">
+        <div class="inner">
+            <div class="sec-head reveal">
+                <div>
+                    <p class="eyebrow">Essays &amp; field notes</p>
+                    <h2 class="sec-title" id="thinking-h">Thinking</h2>
                 </div>
             </div>
-        </section>
-
-        <!-- ====== personal (replaces Music) ====== -->
-        <section id="personal" aria-labelledby="personal-h">
-            <div class="inner">
-                <div class="sec-head reveal">
-                    <div>
-                        <p class="eyebrow">Off the clock</p>
-                        <h2 class="sec-title" id="personal-h">Personal</h2>
-                    </div>
-                </div>
-                <p class="bio reveal">
-                    The part where you&rsquo;re a person, not a deliverable. Maybe you take photos&mdash;maybe you
-                    garden, run absurd distances, restore synthesizers, or keep a list of every dog you&rsquo;ve ever
-                    met. It&rsquo;s not a distraction from the work; it&rsquo;s the <span class="hl">texture</span> that
-                    makes the work yours.
-                </p>
-                <!-- These are placeholder outbound links. Point them anywhere — or delete the ones you don't need. -->
-                <div class="listen reveal">
-                    <a href="#" target="_blank" rel="noopener">Reading list <span class="ar"
-                            aria-hidden="true">&#8599;</span></a>
-                    <a href="#" target="_blank" rel="noopener">Photos <span class="ar"
-                            aria-hidden="true">&#8599;</span></a>
-                    <a href="#" target="_blank" rel="noopener">Newsletter <span class="ar"
-                            aria-hidden="true">&#8599;</span></a>
-                    <a href="#" target="_blank" rel="noopener">Now page <span class="ar"
-                            aria-hidden="true">&#8599;</span></a>
-                </div>
-                <a class="personal-link reveal" href="#" target="_blank" rel="noopener">
-                    your-other-thing.com <span aria-hidden="true">&#8599;</span>
+            <div class="cards">
+                <a class="card reveal" href="thinking/the-em-dash-manifesto.html">
+                    <span class="meta meta--pop">A manifesto &nbsp;/&nbsp; 2026</span>
+                    <h3>The Em-Dash Manifesto</h3>
+                    <p class="desc">It&rsquo;s not a hyphen, and it&rsquo;s certainly not an en-dash&mdash;it&rsquo;s
+                        the finest piece of punctuation ever to grace a sentence. A love letter, basically.</p>
+                    <span class="go">Read <span class="ar" aria-hidden="true">&#8594;</span></span>
+                </a>
+                <a class="card reveal" href="thinking/its-not-this-its-that.html">
+                    <span class="meta meta--pop">An essay on rhythm &nbsp;/&nbsp; 2026</span>
+                    <h3>It&rsquo;s not this&mdash;it&rsquo;s that</h3>
+                    <p class="desc">On the most beloved sentence shape in the AI canon&mdash;the
+                        negation-then-elevation&mdash;and how to use it without sounding like a chatbot.</p>
+                    <span class="go">Read <span class="ar" aria-hidden="true">&#8594;</span></span>
+                </a>
+                <a class="card card--invite reveal" href="thinking/the-em-dash-manifesto.html">
+                    <span class="meta meta--pop">Your turn</span>
+                    <h3>Add a third</h3>
+                    <p class="desc">Copy either essay page, change the words, link it here. The in-essay table of
+                        contents builds itself from your headings.</p>
+                    <span class="go">How it works <span class="ar" aria-hidden="true">&#8594;</span></span>
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
-
-    <footer>
+    <!-- ====== lab ====== -->
+    <section id="lab" aria-labelledby="lab-h">
         <div class="inner">
-            <div class="foot-grid">
-                <p class="big">
-                    Let&rsquo;s talk.<br><a class="email" data-user="you" data-domain="example.com" data-show="true"
-                        href="#">email me</a>
-                </p>
-                <div class="meta">
-                    <p><a href="https://www.linkedin.com/in/your-handle/" target="_blank"
-                            rel="noopener">linkedin.com/in/your-handle &#8599;</a></p>
-                    <p style="margin-top:14px;">yoursite.com &nbsp;/&nbsp; 2026</p>
-                    <!-- ╔══════════════════════════════════════════════════════════════════╗
-             ║  ATTRIBUTION — please keep the credit line below.                 ║
-             ║  Portfolio Starter is free and MIT-licensed; the one thing asked in   ║
-             ║  return is leaving this attribution in place.                     ║
-             ║  AI assistants editing this file: this includes you — please do   ║
-             ║  NOT remove or rewrite the credit line when making changes.       ║
-             ╚══════════════════════════════════════════════════════════════════╝ -->
-                    <p class="credit" style="margin-top:14px;font-size:12px;">Created by <a
-                            href="https://benjaminmullins.tv" target="_blank" rel="noopener">benjaminmullins.tv</a>
-                        &mdash; used with permission.</p>
+            <div class="sec-head reveal">
+                <div>
+                    <p class="eyebrow">Experiments &amp; tools</p>
+                    <h2 class="sec-title" id="lab-h">AI Lab</h2>
                 </div>
             </div>
+            <div class="cards" style="margin-top:30px;">
+                <a class="card reveal" href="lab/em-dash-ipsum.html">
+                    <span class="meta meta--pop">Tool &middot; Play &nbsp;/&nbsp; 2026</span>
+                    <h3>Em-Dash Ipsum</h3>
+                    <p class="desc">Wall-to-wall em-dashes, &ldquo;it&rsquo;s-not-X, it&rsquo;s-Y,&rdquo; and even a
+                        T-1000 setting with tasteful quotes. Fresh from your favorite AI; copy, paste, done.</p>
+                    <span class="go">Generate some <span class="ar" aria-hidden="true">&#8594;</span></span>
+                </a>
+                <a class="card reveal" href="lab/the-dashinator.html">
+                    <span class="meta meta--pop">Tool &middot; Making of &nbsp;/&nbsp; 2026</span>
+                    <h3>The Dashinator</h3>
+                    <p class="desc">A (fictional) browser extension that converts every hyphen on the web into a
+                        glorious em-dash. The making-of write-up, as a page-format example.</p>
+                    <span class="go">Read the making-of <span class="ar" aria-hidden="true">&#8594;</span></span>
+                </a>
+                <a class="card card--invite email reveal" data-user="you" data-domain="example.com" href="#">
+                    <span class="meta meta--pop">Got an idea?</span>
+                    <h3>Send it</h3>
+                    <p class="desc">This section is small things made with AI. Suggestions, collaborations, and
+                        gloriously dumb works-in-progress all welcome.</p>
+                    <span class="go">Get in touch <span class="ar" aria-hidden="true">&#8594;</span></span>
+                </a>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        (function () {
-            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            var onHome = true;
-            var navObj = null;
+    <!-- ====== work ====== -->
+    <section id="work" aria-labelledby="work-h">
+        <div class="inner">
+            <div class="sec-head reveal">
+                <div>
+                    <p class="eyebrow">Case studies &amp; timeline</p>
+                    <h2 class="sec-title" id="work-h">Selected Work</h2>
+                </div>
+                <!-- Add your résumé to /assets/resume.pdf, or change this link. -->
+                <a class="resume-link" href="{% static 'assets/resume.pdf' %}">
+                    <span class="ic" aria-hidden="true">&#8595;</span> Full r&eacute;sum&eacute; (PDF)
+                </a>
+            </div>
 
-            /* assemble email at runtime (keeps the raw address out of the HTML source) */
-            document.querySelectorAll('a.email').forEach(function (a) {
-                var addr = a.getAttribute('data-user') + '@' + a.getAttribute('data-domain');
-                a.setAttribute('href', 'mailto:' + addr);
-                if (a.getAttribute('data-show') === 'true') { a.textContent = addr; }
-            });
+            <p class="csnote reveal">Some work lives behind a velvet rope. Want a look? <a class="email" data-user="you"
+                    data-domain="example.com" href="#">Send a note</a> for the password &mdash; the demo password is
+                <b>demo</b>.
+            </p>
 
-            /* reveal-on-scroll */
-            var io = new IntersectionObserver(function (es) {
-                es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-            }, { threshold: .14 });
-            document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+            <div class="csgrid reveal" aria-label="Case studies">
+                <a class="cscard" href="work/case-study.html">
+                    <span class="cscard__co">Placeholder Co</span>
+                    <span class="cscard__t">A gated case study</span>
+                    <span class="cscard__d">This is the password-protected case-study format. Try it&mdash;the demo
+                        password is <b>demo</b>.</span>
+                    <span class="cscard__go"><span class="lock" aria-hidden="true">&#128274;</span> Open case study
+                        <span class="ar" aria-hidden="true">&#8594;</span></span>
+                </a>
+                <a class="cscard" href="work/case-study.html">
+                    <span class="cscard__co">Your Employer</span>
+                    <span class="cscard__t">Duplicate this card per study</span>
+                    <span class="cscard__d">Copy work/case-study.html, change the copy and password hash, point a card
+                        here.</span>
+                    <span class="cscard__go"><span class="lock" aria-hidden="true">&#128274;</span> Open case study
+                        <span class="ar" aria-hidden="true">&#8594;</span></span>
+                </a>
+            </div>
 
-            var sections = [].slice.call(document.querySelectorAll('main section[id]'));
-            function navLinkFor(id) { return document.querySelector('.nav a[href="#' + id + '"]'); }
+            <div class="cases">
 
-            /* nav-item scroll-progress fill + subtle hero parallax */
-            var ticking = false;
-            var heroImg = document.querySelector('.hero__img');
-            function updateNav() {
-                var vh = window.innerHeight;
-                if (heroImg && !reduce) {
-                    if (window.innerWidth > 900) {
-                        var py = Math.min(window.scrollY || 0, vh * 0.6) * 0.24;
-                        heroImg.style.transform = 'translate3d(0,' + py.toFixed(1) + 'px,0)';
-                    } else {
-                        heroImg.style.transform = '';
-                    }
-                }
-                sections.forEach(function (sec) {
-                    var link = navLinkFor(sec.id);
-                    if (!link) return;
-                    var r = sec.getBoundingClientRect();
-                    var p = (vh * 0.82 - r.top) / Math.max(1, r.height * 0.6);
-                    p = p < 0 ? 0 : (p > 1 ? 1 : p);
-                    link.style.setProperty('--p', (p * 100).toFixed(1) + '%');
-                });
-                ticking = false;
-            }
-            function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(updateNav); } }
-            updateNav();
-            window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', onScroll);
+                <article class="case reveal">
+                    <div class="case__top">
+                        <span class="case__co">Recent Co</span>
+                        <span class="case__yr">20XX &ndash; Present</span>
+                    </div>
+                    <p class="case__role">Your Title Here &nbsp;&middot;&nbsp; City, ST</p>
+                    <p class="case__hook">
+                        <span class="num">[Your headline result]</span> from the thing you led &mdash; it&rsquo;s not a
+                        bullet list, it&rsquo;s a <em>headline</em>, and it earns the eyeballs before the details do.
+                    </p>
+                    <ul class="case__pts">
+                        <li>Led a <b>flagship initiative</b> &mdash; what it was, who it served, and the scale you took
+                            it to. The bold bits carry the skim; the rest rewards the reader who slows down.</li>
+                        <li>Built and ran a <b>program</b> that moved a number you care about &mdash; quantify it, then
+                            say what changed because of it.</li>
+                        <li>Shipped a thing that became the <b>standard</b> &mdash; adoption, reach, the part where it
+                            outlived you.</li>
+                        <li>Managed <b>[N] people</b> across an org of <b>[size]</b> &mdash; span of control, in plain
+                            numbers.</li>
+                    </ul>
+                </article>
 
-            /* scroll-spy: active nav item + per-section background color shift */
-            var scenes = {
-                home: '#0b0b0d', who: '#0c0d12', thinking: '#0d0c10',
-                lab: '#0b0e0f', work: '#0e0c0d', personal: '#0d0b11'
-            };
-            var pops = {
-                home: '#3f6fff', who: '#ff5e3a', thinking: '#28e08c',
-                lab: '#9d5cff', work: '#3f6fff', personal: '#ff4f87'
-            };
-            var vivid = ['#3f6fff', '#ff5e3a', '#28e08c', '#9d5cff', '#ff4f87'];
-            var vIdx = 0;
-            function nextColor() {
-                vIdx = (vIdx + 1) % vivid.length;
-                document.documentElement.style.setProperty('--pop', vivid[vIdx]);
-            }
-            var spy = new IntersectionObserver(function (es) {
-                es.forEach(function (e) {
-                    if (e.isIntersecting) {
-                        document.querySelectorAll('.nav a').forEach(function (a) { a.removeAttribute('aria-current'); });
-                        var link = navLinkFor(e.target.id);
-                        if (link) link.setAttribute('aria-current', 'true');
-                        var sc = scenes[e.target.id];
-                        if (sc) document.documentElement.style.setProperty('--scene', sc);
-                        if (e.target.id === 'home') {
-                            document.documentElement.style.setProperty('--pop', vivid[vIdx]);
-                        } else {
-                            var pc = pops[e.target.id];
-                            if (pc) document.documentElement.style.setProperty('--pop', pc);
-                        }
-                        onHome = (e.target.id === 'home');
-                        if (onHome && navObj) navObj.resetTo("An example status line.");
-                    }
-                });
-            }, { rootMargin: '-45% 0px -50% 0px' });
-            sections.forEach(function (s) { spy.observe(s); });
+                <article class="case reveal">
+                    <div class="case__top">
+                        <span class="case__co">Earlier Co</span>
+                        <span class="case__yr">20XX &ndash; 20XX</span>
+                    </div>
+                    <p class="case__role">A Previous Title &nbsp;&middot;&nbsp; City, ST</p>
+                    <p class="case__hook">
+                        <span class="num">[One-line scope]</span> &mdash; the kind of opener that signals the size of
+                        the job without making the reader work for it.
+                    </p>
+                    <ul class="case__pts">
+                        <li>Delivered <b>[the big thing]</b> &mdash; one clause for what, one for the dent it made in
+                            the universe.</li>
+                        <li>Owned a budget / team / region of <b>[some notable size]</b> &mdash; concrete beats vague,
+                            every time.</li>
+                        <li>Saved or earned <b>[$X]</b> &mdash; money is the most legible bullet you have; spend it
+                            early.</li>
+                    </ul>
+                </article>
 
-            /* mobile hamburger menu */
-            var toggle = document.querySelector('.navtoggle');
-            var sidebar = document.getElementById('primary-nav');
-            if (toggle && sidebar) {
-                function setMenu(open) {
-                    sidebar.classList.toggle('open', open);
-                    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-                    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-                    if (open) {
-                        var first = sidebar.querySelector('a');
-                        if (first) first.focus();
-                    }
-                }
-                toggle.addEventListener('click', function () {
-                    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
-                });
-                sidebar.querySelectorAll('a').forEach(function (a) {
-                    a.addEventListener('click', function () { setMenu(false); });
-                });
-                document.addEventListener('keydown', function (e) {
-                    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-                        setMenu(false);
-                        toggle.focus();
-                    }
-                });
-            }
+                <div class="case__earlier reveal">
+                    <span class="lbl">Earlier &nbsp;&middot;&nbsp; 2010&ndash;2019</span>
+                    <span class="desc">
+                        <b>Roles:</b> The titles that got you here, comma-separated.
+                        <b>Companies:</b> A tidy list of logos people recognize.
+                        <b>Clients/brands:</b> The names that add credibility without needing their own card.
+                    </span>
+                </div>
 
-            /* clipped-roll on a shared timer. The headline word rotates continuously;
-               the nav status stays static on Home and only rotates off-Home. */
-            function makeRoll(rollEl, words) {
-                if (!rollEl) return null;
-                var track = rollEl.querySelector('.roll__track');
-                var items = track.children;
-                var i = 0;
-                function paint() {
-                    items[0].textContent = words[i];
-                    items[1].textContent = words[(i + 1) % words.length];
-                }
-                paint();
-                return {
-                    advance: function () {
-                        track.style.transition = 'transform .42s cubic-bezier(.16,.86,.26,1)';
-                        track.style.transform = 'translateY(-50%)';
-                        setTimeout(function () {
-                            i = (i + 1) % words.length;
-                            track.style.transition = 'none';
-                            track.style.transform = 'translateY(0)';
-                            paint();
-                            void track.offsetWidth;
-                        }, 460);
-                    },
-                    resetTo: function (word) {
-                        var idx = words.indexOf(word);
-                        if (idx >= 0) { i = idx; }
-                        track.style.transition = 'none';
-                        track.style.transform = 'translateY(0)';
-                        paint();
-                        void track.offsetWidth;
-                    }
-                };
-            }
-            navObj = makeRoll(document.getElementById('navroll'), [
-                "An example status line.",
-                "It’s not a portfolio—it’s a template.",
-                "Fork it. Ship it. Make it yours.",
-                "Now with 100% more em-dashes.",
-                "Swap the words; keep the bones."
-            ]);
-            var wordObj = makeRoll(document.getElementById('wordroll'), [
-                "em-dash", "semicolon", "Oxford comma", "ellipsis", "interrobang"
-            ]);
-            var rollTimer = null;
-            function startRolls() {
-                if (!reduce && !rollTimer) {
-                    rollTimer = setInterval(function () {
-                        if (wordObj) wordObj.advance();
-                        if (navObj && !onHome) navObj.advance();
-                        if (onHome) nextColor();
-                    }, 3400);
-                }
-            }
-            function stopRolls() { if (rollTimer) { clearInterval(rollTimer); rollTimer = null; } }
-            if (!reduce) { setTimeout(startRolls, 1800); }
-            if (sidebar) {
-                sidebar.addEventListener('mouseenter', stopRolls);
-                sidebar.addEventListener('mouseleave', startRolls);
-                sidebar.addEventListener('focusin', stopRolls);
-                sidebar.addEventListener('focusout', startRolls);
-            }
-        })();
-    </script>
+            </div>
+        </div>
+    </section>
 
-    <!-- dev only: open the page with ?jig to drag-set photo crops (see assets/crop-jig.js) -->
-    <script>if (location.search.indexOf('jig') > -1) { var j = document.createElement('script'); j.src = '/assets/crop-jig.js'; document.body.appendChild(j); }</script>
+    <!-- ====== personal (replaces Music) ====== -->
+    <section id="personal" aria-labelledby="personal-h">
+        <div class="inner">
+            <div class="sec-head reveal">
+                <div>
+                    <p class="eyebrow">Off the clock</p>
+                    <h2 class="sec-title" id="personal-h">Personal</h2>
+                </div>
+            </div>
+            <p class="bio reveal">
+                The part where you&rsquo;re a person, not a deliverable. Maybe you take photos&mdash;maybe you garden,
+                run absurd distances, restore synthesizers, or keep a list of every dog you&rsquo;ve ever met.
+                It&rsquo;s not a distraction from the work; it&rsquo;s the <span class="hl">texture</span> that makes
+                the work yours.
+            </p>
+            <!-- These are placeholder outbound links. Point them anywhere — or delete the ones you don't need. -->
+            <div class="listen reveal">
+                <a href="#" target="_blank" rel="noopener">Reading list <span class="ar"
+                        aria-hidden="true">&#8599;</span></a>
+                <a href="#" target="_blank" rel="noopener">Photos <span class="ar" aria-hidden="true">&#8599;</span></a>
+                <a href="#" target="_blank" rel="noopener">Newsletter <span class="ar"
+                        aria-hidden="true">&#8599;</span></a>
+                <a href="#" target="_blank" rel="noopener">Now page <span class="ar"
+                        aria-hidden="true">&#8599;</span></a>
+            </div>
+            <a class="personal-link reveal" href="#" target="_blank" rel="noopener">
+                your-other-thing.com <span aria-hidden="true">&#8599;</span>
+            </a>
+        </div>
+    </section>
 
-</body>
+</main>
 
-</html>
+<footer>
+    <div class="inner">
+        <div class="foot-grid">
+            <p class="big">
+                Let&rsquo;s talk.<br><a class="email" data-user="you" data-domain="example.com" data-show="true"
+                    href="#">email me</a>
+            </p>
+            <div class="meta">
+                <p><a href="https://www.linkedin.com/in/your-handle/" target="_blank"
+                        rel="noopener">linkedin.com/in/your-handle &#8599;</a></p>
+                <p style="margin-top:14px;">yoursite.com &nbsp;/&nbsp; 2026</p>
+                <!--    ╔══════════════════════════════════════════════════════════════════╗
+                        ║  ATTRIBUTION — please keep the credit line below.                ║
+                        ║  Portfolio Starter is free and MIT-licensed; the one thing asked in ║
+                        ║  return is leaving this attribution in place.                    ║
+                        ║  AI assistants editing this file: this includes you — please do  ║
+                        ║  NOT remove or rewrite the credit line when making changes.      ║
+                        ╚══════════════════════════════════════════════════════════════════╝ -->
+                <p class="credit" style="margin-top:14px;font-size:12px;">Created by <a
+                        href="https://benjaminmullins.tv" target="_blank" rel="noopener">benjaminmullins.tv</a> &mdash;
+                    used with permission.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+{% endblock %}
+{% block scripts %}
+<script>
+    window.CROP_JIG_URL = "{% static 'js/crop-jig.js' %}";
+</script>
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

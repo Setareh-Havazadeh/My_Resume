@@ -1,29 +1,27 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!doctype html>
-<html lang="en">
+{% block title %}404 — not here{% endblock %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>404 — not here</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500&display=swap"
-        rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-    <link rel="stylesheet" href="{% static 'css/404.css' %}">
+{% block meta %}
+<meta name="robots" content="noindex">
+{% endblock %}
 
-</head>
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/404.css' %}">
+{% endblock %}
 
-<body>
-    <div class="wrap">
-        <div class="code">404</div>
-        <h1>It&rsquo;s not lost&mdash;it&rsquo;s just not here.</h1>
-        <p>This page took a held breath and never came back. The dash, however, remains eternal.</p>
-        <a class="home" href="/"><span aria-hidden="true">&#8592;</span> Back home</a>
-    </div>
-</body>
+{% block content %}
+<div class="wrap">
+    <div class="code">404</div>
 
-</html>
+    <h1>It&rsquo;s not lost&mdash;it&rsquo;s just not here.</h1>
+
+    <p>This page took a held breath and never came back. The dash, however, remains eternal.</p>
+
+    <a class="home" href="/">
+        <span aria-hidden="true">&#8592;</span>
+        Back home
+    </a>
+</div>
+{% endblock %}
